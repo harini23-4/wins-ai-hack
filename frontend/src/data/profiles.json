@@ -1,0 +1,74 @@
+[
+  {
+    "id": "p1",
+    "name": "Dr. Amara Okafor",
+    "title": "Associate Professor, Computer Science",
+    "institution": "Rivertown University",
+    "department": "Computer Science",
+    "careerStage": "mid-career",
+    "interests": ["federated learning", "differential privacy", "healthcare AI", "distributed systems"],
+    "expertise": ["machine learning", "systems", "privacy engineering"],
+    "bio": "Builds privacy-preserving ML systems for clinical data sharing across hospital networks.",
+    "orcid": "0000-0001-1111-1111"
+  },
+  {
+    "id": "p2",
+    "name": "Dr. Rahul Mehta",
+    "title": "Assistant Professor, Bioinformatics",
+    "institution": "Rivertown University",
+    "department": "Biology",
+    "careerStage": "early-career",
+    "interests": ["genomics", "healthcare AI", "single-cell analysis", "cancer biology"],
+    "expertise": ["bioinformatics", "statistics", "machine learning"],
+    "bio": "Applies ML to single-cell genomic data to identify early cancer biomarkers.",
+    "orcid": "0000-0002-2222-2222"
+  },
+  {
+    "id": "p3",
+    "name": "Dr. Elena Fischer",
+    "title": "Professor, Public Health",
+    "institution": "Northbridge Institute",
+    "department": "Public Health",
+    "careerStage": "senior",
+    "interests": ["healthcare AI", "epidemiology", "health equity", "clinical trials"],
+    "expertise": ["biostatistics", "epidemiology", "policy analysis"],
+    "bio": "Studies how algorithmic decision-making in hospitals affects care disparities.",
+    "orcid": "0000-0003-3333-3333"
+  },
+  {
+    "id": "p4",
+    "name": "Dr. Sofia Alvarez",
+    "title": "Assistant Professor, Materials Science",
+    "institution": "Northbridge Institute",
+    "department": "Materials Science",
+    "careerStage": "early-career",
+    "interests": ["battery materials", "sustainable energy", "nanomaterials"],
+    "expertise": ["materials chemistry", "electrochemistry"],
+    "bio": "Designs solid-state electrolytes for next-generation batteries.",
+    "orcid": "0000-0004-4444-4444"
+  },
+  {
+    "id": "p5",
+    "name": "Dr. James Whitfield",
+    "title": "Associate Professor, Electrical Engineering",
+    "institution": "Rivertown University",
+    "department": "Electrical Engineering",
+    "careerStage": "mid-career",
+    "interests": ["distributed systems", "edge computing", "sustainable energy", "IoT sensing"],
+    "expertise": ["systems", "signal processing", "hardware design"],
+    "bio": "Builds low-power edge devices for real-time environmental and grid sensing.",
+    "orcid": "0000-0005-5555-5555"
+  },
+  {
+    "id": "p6",
+    "name": "Dr. Priya Nair",
+    "title": "Professor, Computer Science",
+    "institution": "Northbridge Institute",
+    "department": "Computer Science",
+    "careerStage": "senior",
+    "interests": ["differential privacy", "cryptography", "federated learning"],
+    "expertise": ["theoretical CS", "privacy engineering", "cryptography"],
+    "bio": "Works on formal privacy guarantees for large-scale collaborative learning systems.",
+    "orcid": "0000-0006-6666-6666"
+  }
+]

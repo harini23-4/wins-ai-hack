@@ -1,0 +1,39 @@
+[
+  {
+    "id": "proj1",
+    "ownerId": "p1",
+    "title": "Federated Learning for Multi-Hospital Diagnostics",
+    "collaborators": ["p2", "p3"],
+    "milestones": [
+      { "id": "m1", "name": "Define privacy threat model", "status": "done", "date": "2026-03-01" },
+      { "id": "m2", "name": "Prototype federated aggregation server", "status": "done", "date": "2026-05-15" },
+      { "id": "m3", "name": "Pilot with 2 partner hospitals", "status": "in-progress", "date": "2026-10-01" },
+      { "id": "m4", "name": "Full multi-site deployment", "status": "planned", "date": "2027-03-01" }
+    ],
+    "publications": [
+      { "title": "Privacy-Preserving Aggregation for Clinical Federated Learning", "venue": "IEEE S&P", "year": 2026, "status": "published" },
+      { "title": "Bias Under Federation: An Empirical Study", "venue": "NeurIPS", "year": 2026, "status": "under review" }
+    ],
+    "funding": [
+      { "source": "Internal Seed Grant", "amount": 40000, "status": "secured" },
+      { "source": "NSF SaTC", "amount": 500000, "status": "applied" }
+    ]
+  },
+  {
+    "id": "proj2",
+    "ownerId": "p4",
+    "title": "Solid-State Electrolytes for Grid Storage",
+    "collaborators": ["p5"],
+    "milestones": [
+      { "id": "m1", "name": "Synthesize candidate electrolyte materials", "status": "done", "date": "2026-02-10" },
+      { "id": "m2", "name": "Ionic conductivity benchmarking", "status": "in-progress", "date": "2026-09-20" },
+      { "id": "m3", "name": "Prototype pouch cell testing", "status": "planned", "date": "2027-01-15" }
+    ],
+    "publications": [
+      { "title": "High-Conductivity Solid Electrolytes at Room Temperature", "venue": "Nature Energy", "year": 2026, "status": "published" }
+    ],
+    "funding": [
+      { "source": "DOE Battery500 Consortium Grant", "amount": 750000, "status": "secured" }
+    ]
+  }
+]
