@@ -1,0 +1,62 @@
+[
+  {
+    "id": "g1",
+    "title": "NSF Secure & Trustworthy Cyberspace (SaTC)",
+    "agency": "National Science Foundation",
+    "tags": ["differential privacy", "privacy engineering", "cryptography", "systems"],
+    "amount": 500000,
+    "deadline": "2026-11-15",
+    "careerStageEligibility": ["early-career", "mid-career", "senior"],
+    "description": "Funds foundational and applied research on privacy, security, and trust in computing systems."
+  },
+  {
+    "id": "g2",
+    "title": "NIH R01 - AI for Precision Medicine",
+    "agency": "National Institutes of Health",
+    "tags": ["healthcare AI", "genomics", "machine learning", "clinical trials"],
+    "amount": 1200000,
+    "deadline": "2027-02-05",
+    "careerStageEligibility": ["mid-career", "senior"],
+    "description": "Supports research applying AI/ML methods to precision diagnostics and treatment."
+  },
+  {
+    "id": "g3",
+    "title": "NIH K99/R00 Pathway to Independence",
+    "agency": "National Institutes of Health",
+    "tags": ["genomics", "bioinformatics", "cancer biology"],
+    "amount": 300000,
+    "deadline": "2026-10-20",
+    "careerStageEligibility": ["early-career"],
+    "description": "Career-transition award for early-career researchers moving toward independent labs."
+  },
+  {
+    "id": "g4",
+    "title": "DOE Battery500 Consortium Grant",
+    "agency": "Department of Energy",
+    "tags": ["battery materials", "sustainable energy", "electrochemistry", "nanomaterials"],
+    "amount": 750000,
+    "deadline": "2026-12-01",
+    "careerStageEligibility": ["early-career", "mid-career", "senior"],
+    "description": "Funds next-gen energy storage research toward higher energy-density batteries."
+  },
+  {
+    "id": "g5",
+    "title": "NSF CAREER Award",
+    "agency": "National Science Foundation",
+    "tags": ["distributed systems", "edge computing", "IoT sensing", "systems"],
+    "amount": 550000,
+    "deadline": "2027-01-10",
+    "careerStageEligibility": ["early-career"],
+    "description": "Early-career faculty award supporting research and education integration."
+  },
+  {
+    "id": "g6",
+    "title": "RWJF Health Equity Data Science Grant",
+    "agency": "Robert Wood Johnson Foundation",
+    "tags": ["health equity", "epidemiology", "healthcare AI", "policy analysis"],
+    "amount": 250000,
+    "deadline": "2026-09-30",
+    "careerStageEligibility": ["mid-career", "senior"],
+    "description": "Supports data-driven research to reduce disparities in healthcare access and outcomes."
+  }
+]
