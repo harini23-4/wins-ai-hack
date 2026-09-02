@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const emptyForm = {
+const defaultEmptyForm = {
   name: "",
   title: "",
   institution: "",
@@ -12,8 +12,32 @@ const emptyForm = {
   orcid: "",
 };
 
-export default function ProfileForm({ onCreate, onCancel }) {
-  const [form, setForm] = useState(emptyForm);
+export default function ProfileForm({ initialProfile, onSave, onCancel }) {
+  const [form, setForm] = useState(defaultEmptyForm);
+  const isEditing = Boolean(initialProfile?.id);
+
+  // Pre-fill form when editing an existing profile
+  useEffect(() => {
+    if (initialProfile) {
+      setForm({
+        name: initialProfile.name || "",
+        title: initialProfile.title || "",
+        institution: initialProfile.institution || "",
+        department: initialProfile.department || "",
+        careerStage: initialProfile.careerStage || "early-career",
+        interests: Array.isArray(initialProfile.interests)
+          ? initialProfile.interests.join(", ")
+          : initialProfile.interests || "",
+        expertise: Array.isArray(initialProfile.expertise)
+          ? initialProfile.expertise.join(", ")
+          : initialProfile.expertise || "",
+        bio: initialProfile.bio || "",
+        orcid: initialProfile.orcid || "",
+      });
+    } else {
+      setForm(defaultEmptyForm);
+    }
+  }, [initialProfile]);
 
   const update = (field) => (e) => setForm({ ...form, [field]: e.target.value });
 
@@ -21,8 +45,8 @@ export default function ProfileForm({ onCreate, onCancel }) {
     e.preventDefault();
     if (!form.name.trim()) return;
 
-    const newProfile = {
-      id: "p" + Date.now(),
+    const savedProfile = {
+      id: initialProfile?.id || "p" + Date.now(),
       name: form.name.trim(),
       title: form.title.trim(),
       institution: form.institution.trim(),
@@ -40,7 +64,7 @@ export default function ProfileForm({ onCreate, onCancel }) {
       orcid: form.orcid.trim(),
     };
 
-    onCreate(newProfile);
+    onSave(savedProfile);
   };
 
   return (
@@ -48,7 +72,9 @@ export default function ProfileForm({ onCreate, onCancel }) {
       <form onSubmit={handleSubmit}>
         {/* Section 1: Basic Information */}
         <div className="form-section">
-          <h3 className="form-section-title">1. Basic Information</h3>
+          <h3 className="form-section-title">
+            {isEditing ? "✏️ Edit Basic Information" : "1. Basic Information"}
+          </h3>
 
           <div className="form-row-2">
             <div className="form-group">
@@ -68,7 +94,7 @@ export default function ProfileForm({ onCreate, onCancel }) {
                 className="form-input"
                 value={form.title}
                 onChange={update("title")}
-                placeholder="e.g. Assistant Professor, Postdoctoral Fellow"
+                placeholder="e.g. Associate Professor, Lead PI"
               />
             </div>
           </div>
@@ -89,7 +115,9 @@ export default function ProfileForm({ onCreate, onCancel }) {
 
         {/* Section 2: Affiliation */}
         <div className="form-section">
-          <h3 className="form-section-title">2. Academic & Lab Affiliation</h3>
+          <h3 className="form-section-title">
+            {isEditing ? "🏫 Edit Affiliation" : "2. Academic & Lab Affiliation"}
+          </h3>
 
           <div className="form-row-2">
             <div className="form-group">
@@ -98,7 +126,7 @@ export default function ProfileForm({ onCreate, onCancel }) {
                 className="form-input"
                 value={form.institution}
                 onChange={update("institution")}
-                placeholder="e.g. Stanford University"
+                placeholder="e.g. Rivertown University"
               />
             </div>
 
@@ -108,7 +136,7 @@ export default function ProfileForm({ onCreate, onCancel }) {
                 className="form-input"
                 value={form.department}
                 onChange={update("department")}
-                placeholder="e.g. Computer Science & AI Lab"
+                placeholder="e.g. Computer Science"
               />
             </div>
           </div>
@@ -116,7 +144,9 @@ export default function ProfileForm({ onCreate, onCancel }) {
 
         {/* Section 3: Research Focus */}
         <div className="form-section">
-          <h3 className="form-section-title">3. Research Domains & Expertise</h3>
+          <h3 className="form-section-title">
+            {isEditing ? "🔬 Edit Research Domains & Skills" : "3. Research Domains & Expertise"}
+          </h3>
 
           <div className="form-group">
             <label className="form-label">Research Interests (comma-separated)</label>
@@ -126,7 +156,7 @@ export default function ProfileForm({ onCreate, onCancel }) {
               onChange={update("interests")}
               placeholder="e.g. federated learning, healthcare AI, NLP"
             />
-            <span className="form-hint">Used to calculate research overlap scores with potential collaborators.</span>
+            <span className="form-hint">Used for live AI collaborator & grant compatibility scores.</span>
           </div>
 
           <div className="form-group">
@@ -135,15 +165,17 @@ export default function ProfileForm({ onCreate, onCancel }) {
               className="form-input"
               value={form.expertise}
               onChange={update("expertise")}
-              placeholder="e.g. deep learning, distributed systems, PyTorch"
+              placeholder="e.g. machine learning, systems, differential privacy"
             />
-            <span className="form-hint">Complementary expertise helps match cross-disciplinary research teams.</span>
+            <span className="form-hint">Complementary skills help match cross-disciplinary teams.</span>
           </div>
         </div>
 
         {/* Section 4: Summary & Bio */}
         <div className="form-section">
-          <h3 className="form-section-title">4. Summary & Verification</h3>
+          <h3 className="form-section-title">
+            {isEditing ? "📝 Edit Bio & ORCID" : "4. Summary & Verification"}
+          </h3>
 
           <div className="form-group">
             <label className="form-label">Short Biography</label>
@@ -151,7 +183,7 @@ export default function ProfileForm({ onCreate, onCancel }) {
               className="form-textarea"
               value={form.bio}
               onChange={update("bio")}
-              placeholder="Brief overview of current research focus, lab mission, or projects..."
+              placeholder="Brief overview of research focus, mission, or projects..."
               rows={3}
             />
           </div>
@@ -170,7 +202,7 @@ export default function ProfileForm({ onCreate, onCancel }) {
         {/* Actions */}
         <div className="form-actions">
           <button type="submit" className="btn-primary">
-            Create & View Matches
+            {isEditing ? "💾 Save Changes" : "Create & View Matches"}
           </button>
           <button type="button" className="btn-ghost" onClick={onCancel}>
             Cancel
