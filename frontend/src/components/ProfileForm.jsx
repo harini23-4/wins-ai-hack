@@ -44,127 +44,139 @@ export default function ProfileForm({ onCreate, onCancel }) {
   };
 
   return (
-    <form className="card" onSubmit={handleSubmit} style={{ maxWidth: 760 }}>
-      {/* Section 1: Basic Info */}
-      <div className="form-section">
-        <div className="section-label" style={{ marginTop: 0 }}>
-          1. Basic Information
+    <div className="card" style={{ maxWidth: 820, margin: "0 0 32px 0" }}>
+      <form onSubmit={handleSubmit}>
+        {/* Section 1: Basic Information */}
+        <div className="form-section">
+          <h3 className="form-section-title">1. Basic Information</h3>
+
+          <div className="form-row-2">
+            <div className="form-group">
+              <label className="form-label">Full Name *</label>
+              <input
+                className="form-input"
+                value={form.name}
+                onChange={update("name")}
+                placeholder="e.g. Dr. Jane Smith"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Professional Title</label>
+              <input
+                className="form-input"
+                value={form.title}
+                onChange={update("title")}
+                placeholder="e.g. Assistant Professor, Postdoctoral Fellow"
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Career Stage</label>
+            <select
+              className="form-select"
+              value={form.careerStage}
+              onChange={update("careerStage")}
+            >
+              <option value="early-career">Early-career (Postdoc / Junior PI)</option>
+              <option value="mid-career">Mid-career (Associate Professor / Senior Researcher)</option>
+              <option value="senior">Senior (Full Professor / Lab Director)</option>
+            </select>
+          </div>
         </div>
 
-        <div className="form-grid-2">
-          <label className="form-field">
-            Full Name *
-            <input
-              value={form.name}
-              onChange={update("name")}
-              placeholder="e.g. Dr. Jane Smith"
-              required
-            />
-          </label>
+        {/* Section 2: Affiliation */}
+        <div className="form-section">
+          <h3 className="form-section-title">2. Academic & Lab Affiliation</h3>
 
-          <label className="form-field">
-            Professional Title
-            <input
-              value={form.title}
-              onChange={update("title")}
-              placeholder="e.g. Assistant Professor, Lead Researcher"
-            />
-          </label>
+          <div className="form-row-2">
+            <div className="form-group">
+              <label className="form-label">Institution / University</label>
+              <input
+                className="form-input"
+                value={form.institution}
+                onChange={update("institution")}
+                placeholder="e.g. Stanford University"
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Department / School</label>
+              <input
+                className="form-input"
+                value={form.department}
+                onChange={update("department")}
+                placeholder="e.g. Computer Science & AI Lab"
+              />
+            </div>
+          </div>
         </div>
 
-        <label className="form-field">
-          Career Stage
-          <select value={form.careerStage} onChange={update("careerStage")}>
-            <option value="early-career">Early-career (Postdoc / Junior PI)</option>
-            <option value="mid-career">Mid-career (Associate Professor / Senior Researcher)</option>
-            <option value="senior">Senior (Full Professor / Lab Director)</option>
-          </select>
-        </label>
-      </div>
+        {/* Section 3: Research Focus */}
+        <div className="form-section">
+          <h3 className="form-section-title">3. Research Domains & Expertise</h3>
 
-      {/* Section 2: Affiliation */}
-      <div className="form-section">
-        <div className="section-label">2. Academic & Lab Affiliation</div>
-
-        <div className="form-grid-2">
-          <label className="form-field">
-            Institution
+          <div className="form-group">
+            <label className="form-label">Research Interests (comma-separated)</label>
             <input
-              value={form.institution}
-              onChange={update("institution")}
-              placeholder="e.g. Stanford University"
+              className="form-input"
+              value={form.interests}
+              onChange={update("interests")}
+              placeholder="e.g. federated learning, healthcare AI, NLP"
             />
-          </label>
+            <span className="form-hint">Used to calculate research overlap scores with potential collaborators.</span>
+          </div>
 
-          <label className="form-field">
-            Department
+          <div className="form-group">
+            <label className="form-label">Methodological Expertise (comma-separated)</label>
             <input
-              value={form.department}
-              onChange={update("department")}
-              placeholder="e.g. Computer Science"
+              className="form-input"
+              value={form.expertise}
+              onChange={update("expertise")}
+              placeholder="e.g. deep learning, distributed systems, PyTorch"
             />
-          </label>
+            <span className="form-hint">Complementary expertise helps match cross-disciplinary research teams.</span>
+          </div>
         </div>
-      </div>
 
-      {/* Section 3: Research & Skills */}
-      <div className="form-section">
-        <div className="section-label">3. Research Domains & Expertise</div>
+        {/* Section 4: Summary & Bio */}
+        <div className="form-section">
+          <h3 className="form-section-title">4. Summary & Verification</h3>
 
-        <label className="form-field">
-          Research Interests (comma-separated)
-          <input
-            value={form.interests}
-            onChange={update("interests")}
-            placeholder="e.g. federated learning, healthcare AI, NLP"
-          />
-          <span className="form-hint">These are used to calculate overlap scores with other researchers.</span>
-        </label>
+          <div className="form-group">
+            <label className="form-label">Short Biography</label>
+            <textarea
+              className="form-textarea"
+              value={form.bio}
+              onChange={update("bio")}
+              placeholder="Brief overview of current research focus, lab mission, or projects..."
+              rows={3}
+            />
+          </div>
 
-        <label className="form-field">
-          Methodological Expertise (comma-separated)
-          <input
-            value={form.expertise}
-            onChange={update("expertise")}
-            placeholder="e.g. deep learning, distributed systems, PyTorch"
-          />
-          <span className="form-hint">Complementary expertise helps match cross-disciplinary teams.</span>
-        </label>
-      </div>
+          <div className="form-group">
+            <label className="form-label">ORCID iD</label>
+            <input
+              className="form-input"
+              value={form.orcid}
+              onChange={update("orcid")}
+              placeholder="0000-0000-0000-0000"
+            />
+          </div>
+        </div>
 
-      {/* Section 4: Bio & ORCID */}
-      <div className="form-section">
-        <div className="section-label">4. Summary & Verification</div>
-
-        <label className="form-field">
-          Short Biography
-          <textarea
-            value={form.bio}
-            onChange={update("bio")}
-            placeholder="Brief overview of current projects, lab mission, or research goals..."
-            rows={3}
-          />
-        </label>
-
-        <label className="form-field">
-          ORCID iD
-          <input
-            value={form.orcid}
-            onChange={update("orcid")}
-            placeholder="0000-0000-0000-0000"
-          />
-        </label>
-      </div>
-
-      {/* Actions */}
-      <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
-        <button type="submit" className="btn-primary">
-          Create & View Matches
-        </button>
-        <button type="button" className="btn-ghost" onClick={onCancel}>
-          Cancel
-        </button>
-      </div>
-    </form>
+        {/* Actions */}
+        <div className="form-actions">
+          <button type="submit" className="btn-primary">
+            Create & View Matches
+          </button>
+          <button type="button" className="btn-ghost" onClick={onCancel}>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
