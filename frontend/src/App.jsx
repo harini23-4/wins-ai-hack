@@ -28,6 +28,7 @@ const ROLE_TABS = {
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [creating, setCreating] = useState(false);
+  const [editing, setEditing] = useState(false);
   const [profiles, setProfiles] = useState([]);
   const [activeId, setActiveId] = useState(null);
   const [role, setRole] = useState("researcher");
@@ -45,6 +46,8 @@ export default function App() {
   const handleRoleChange = (newRole) => {
     setRole(newRole);
     setTab(ROLE_TABS[newRole][0].id);
+    setEditing(false);
+    setCreating(false);
   };
 
   const handleCreateProfile = (newProfile) => {
@@ -52,10 +55,31 @@ export default function App() {
     setProfiles(updated);
     setActiveId(newProfile.id);
     setCreating(false);
+    setEditing(false);
     setTab("profile");
 
     const custom = JSON.parse(localStorage.getItem("collabmatch_custom_profiles") || "[]");
     localStorage.setItem("collabmatch_custom_profiles", JSON.stringify([...custom, newProfile]));
+  };
+
+  const handleUpdateProfile = (updatedProfile) => {
+    const updated = profiles.map((p) =>
+      String(p.id) === String(updatedProfile.id) ? updatedProfile : p
+    );
+    setProfiles(updated);
+    setEditing(false);
+    setCreating(false);
+    setTab("profile");
+
+    // Persist edits to localStorage
+    const custom = JSON.parse(localStorage.getItem("collabmatch_custom_profiles") || "[]");
+    const existingIndex = custom.findIndex((p) => String(p.id) === String(updatedProfile.id));
+    if (existingIndex >= 0) {
+      custom[existingIndex] = updatedProfile;
+      localStorage.setItem("collabmatch_custom_profiles", JSON.stringify(custom));
+    } else {
+      localStorage.setItem("collabmatch_custom_profiles", JSON.stringify([...custom, updatedProfile]));
+    }
   };
 
   const profile = profiles.find((p) => String(p.id) === String(activeId));
@@ -77,19 +101,37 @@ export default function App() {
           {currentTabs.map((t) => (
             <button
               key={t.id}
-              className={`nav-link ${tab === t.id ? "active" : ""}`}
+              className={`nav-link ${tab === t.id && !creating && !editing ? "active" : ""}`}
               onClick={() => {
                 setTab(t.id);
                 setCreating(false);
+                setEditing(false);
               }}
             >
               {t.label}
             </button>
           ))}
         </nav>
+
+        {/* 1. EDIT BUTTON IN SIDEBAR */}
+        {profile && (
+          <div style={{ marginTop: "auto", borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: 16 }}>
+            <button
+              type="button"
+              className="nav-link"
+              style={{ color: "var(--c-mint-lightest)", background: "rgba(255,255,255,0.08)", fontWeight: 600 }}
+              onClick={() => {
+                setEditing(true);
+                setCreating(false);
+              }}
+            >
+              ✏️ Edit Active Profile
+            </button>
+          </div>
+        )}
       </aside>
 
-      {/* Main Content & Spaced Top Header */}
+      {/* Main Content & Top Header */}
       <div className="main-wrapper">
         <header className="top-header">
           <div className="header-left">
@@ -140,6 +182,7 @@ export default function App() {
                   onChange={(e) => {
                     setActiveId(e.target.value);
                     setCreating(false);
+                    setEditing(false);
                   }}
                 >
                   {profiles.map((p) => (
@@ -151,10 +194,28 @@ export default function App() {
               </div>
             )}
 
+            {/* 2. EDIT BUTTON IN TOP HEADER */}
+            {profile && (
+              <button
+                type="button"
+                className="btn-ghost"
+                onClick={() => {
+                  setEditing(true);
+                  setCreating(false);
+                }}
+                style={{ fontWeight: 600 }}
+              >
+                ✏️ Edit Profile
+              </button>
+            )}
+
             <button
               type="button"
               className="btn-primary"
-              onClick={() => setCreating(true)}
+              onClick={() => {
+                setCreating(true);
+                setEditing(false);
+              }}
             >
               + New Profile
             </button>
@@ -162,30 +223,62 @@ export default function App() {
         </header>
 
         <main className="main">
-          {!profile && !creating && (
+          {!profile && !creating && !editing && (
             <div className="loading">Loading research database...</div>
           )}
 
+          {/* CREATE PROFILE FORM */}
           {creating && (
             <>
               <h1 className="page-title">Create Researcher Profile</h1>
               <p className="page-sub">
-                Add your profile to compute live AI collaborator scores and grant matches immediately.
+                Add a new researcher profile to calculate live collaborator scores and grant matches.
               </p>
               <ProfileForm
-                onCreate={handleCreateProfile}
+                onSave={handleCreateProfile}
                 onCancel={() => setCreating(false)}
               />
             </>
           )}
 
-          {!creating && profile && tab === "profile" && (
+          {/* EDIT PROFILE FORM */}
+          {editing && profile && (
             <>
-              <h1 className="page-title">Researcher Profile</h1>
+              <h1 className="page-title">Edit Researcher Profile</h1>
               <p className="page-sub">
-                Switch profiles in the top right to explore matching scores from different perspectives.
+                Update details for <strong>{profile.name}</strong>. Matching algorithms will recompute instantly.
               </p>
+              <ProfileForm
+                initialProfile={profile}
+                onSave={handleUpdateProfile}
+                onCancel={() => setEditing(false)}
+              />
+            </>
+          )}
+
+          {/* 3. RESEARCHER PROFILE VIEW WITH EDIT BUTTON */}
+          {!creating && !editing && profile && tab === "profile" && (
+            <>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: 20 }}>
+                <div>
+                  <h1 className="page-title">Researcher Profile</h1>
+                  <p className="page-sub" style={{ marginBottom: 0 }}>
+                    Switch profiles in the top right or click edit to update your research topics.
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={() => setEditing(true)}
+                  style={{ display: "inline-flex", alignItems: "center", gap: 6 }}
+                >
+                  ✏️ Edit Profile
+                </button>
+              </div>
+
               <ProfileOverview profile={profile} />
+
               <div className="card">
                 <div className="section-label" style={{ marginTop: 0 }}>
                   Methodological & Domain Expertise
@@ -204,15 +297,15 @@ export default function App() {
             </>
           )}
 
-          {!creating && profile && tab === "collaborators" && (
+          {!creating && !editing && profile && tab === "collaborators" && (
             <CollaboratorMatches profile={profile} />
           )}
 
-          {!creating && profile && tab === "funding" && (
+          {!creating && !editing && profile && tab === "funding" && (
             <FundingMatches profile={profile} />
           )}
 
-          {!creating && profile && tab === "projects" && (
+          {!creating && !editing && profile && tab === "projects" && (
             <ProjectTracker profile={profile} />
           )}
         </main>
