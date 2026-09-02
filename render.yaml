@@ -1,0 +1,17 @@
+databases:
+  - name: research-collab-db
+    plan: free
+    databaseName: research_collab
+    user: research_collab
+
+services:
+  - type: web
+    name: research-collab-backend
+    env: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: research-collab-db
+          property: connectionString

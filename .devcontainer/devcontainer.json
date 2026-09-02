@@ -1,0 +1,31 @@
+{
+  "name": "research-collab-tracker",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "humao.rest-client"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      }
+    }
+  },
+
+  "postCreateCommand": "pip install -r requirements.txt && cp -n .env.example .env && alembic upgrade head && python -m app.seed_data",
+
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "FastAPI backend",
+      "onAutoForward": "openPreview"
+    }
+  }
+}
