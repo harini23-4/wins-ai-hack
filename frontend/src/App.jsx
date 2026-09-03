@@ -114,7 +114,7 @@ export default function App() {
           ))}
         </nav>
 
-        {/* 1. EDIT BUTTON IN SIDEBAR */}
+        {/* Edit Button in Sidebar */}
         {profile && (
           <div style={{ marginTop: "auto", borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: 16 }}>
             <button
@@ -195,7 +195,6 @@ export default function App() {
               </div>
             )}
 
-            {/* 2. EDIT BUTTON IN TOP HEADER */}
             {profile && (
               <button
                 type="button"
@@ -257,7 +256,7 @@ export default function App() {
             </>
           )}
 
-          {/* 3. RESEARCHER PROFILE VIEW WITH EDIT BUTTON */}
+          {/* RESEARCHER PROFILE VIEW */}
           {!creating && !editing && profile && tab === "profile" && (
             <>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: 20 }}>

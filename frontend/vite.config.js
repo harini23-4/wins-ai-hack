@@ -1,15 +1,16 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-// vite.config.js
-export default {
+export default defineConfig({
+  plugins: [react()],
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',   // only works if C is in the SAME Codespace as you
+        target: 'http://127.0.0.1:8000', // 127.0.0.1 avoids some localhost/IPv6 resolution quirks
         changeOrigin: true,
-      }
-    }
-  }
-}
+        secure: false,
+      },
+    },
+  },
+})
