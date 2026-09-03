@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine
 from app.models import Base
-from app.routers import profiles, match, graph, funding, tracker
+from app.routers import profiles, match, graph, funding, tracker, frontend_adapter
 
 Base.metadata.create_all(bind=engine)
 
@@ -21,6 +21,7 @@ app.include_router(match.router)
 app.include_router(graph.router)
 app.include_router(funding.router)
 app.include_router(tracker.router)
+app.include_router(frontend_adapter.router)
 
 @app.get("/health")
 def health():

@@ -1,3 +1,4 @@
+import React from 'react';
 export default function ScoreBar({ score }) {
   const pct = Math.round(score * 100);
   return (

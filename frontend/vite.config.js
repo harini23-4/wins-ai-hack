@@ -2,14 +2,14 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
+// vite.config.js
+export default {
   server: {
-    host: true, // Exposes the server to 0.0.0.0 for Codespaces
-    port: 5173,
-    strictPort: true,
-    watch: {
-      usePolling: true,
-    },
-  },
-});
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',   // only works if C is in the SAME Codespace as you
+        changeOrigin: true,
+      }
+    }
+  }
+}

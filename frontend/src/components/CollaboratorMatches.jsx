@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from "react";
 import { getCollaboratorMatches, getProfiles } from "../lib/api.js";
 import ScoreBar from "./ScoreBar.jsx";

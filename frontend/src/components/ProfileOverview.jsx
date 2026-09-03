@@ -1,3 +1,4 @@
+import React from 'react';
 export default function ProfileOverview({ profile }) {
   if (!profile) return null;
   return (

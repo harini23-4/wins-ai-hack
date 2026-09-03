@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from "react";
 import { getProfiles } from "./lib/api.js";
 import ProfileOverview from "./components/ProfileOverview.jsx";

@@ -10,7 +10,7 @@ import grants from "../data/grants.json";
 import projects from "../data/projects.json";
 import { findCollaborators, findGrants } from "./matching.js";
 
-const USE_MOCK = true; // <- flip to false once the real API is ready
+const USE_MOCK = false; // <- flip to false once the real API is ready
 const BASE_URL = "/api"; // proxied to the backend in vite.config.js
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
