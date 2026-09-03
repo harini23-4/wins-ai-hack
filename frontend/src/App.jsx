@@ -99,26 +99,21 @@ export default function App() {
             {role.toUpperCase()} NAVIGATION
           </div>
           {currentTabs.map((t) => (
-            <button className="btn-primary" onClick={...}>
-  <svg 
-    width="15" 
-    height="15" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round"
-  >
-    <line x1="22" y1="2" x2="11" y2="13"></line>
-    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-  </svg>
-  <span>Send Collaboration Invitation</span>
-</button>
+            <button
+              key={t.id}
+              className={`nav-link ${tab === t.id && !creating && !editing ? "active" : ""}`}
+              onClick={() => {
+                setTab(t.id);
+                setCreating(false);
+                setEditing(false);
+              }}
+            >
+              {t.label}
+            </button>
           ))}
         </nav>
 
-        {/* 1. EDIT BUTTON IN SIDEBAR */}
+        {/* Edit Button in Sidebar */}
         {profile && (
           <div style={{ marginTop: "auto", borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: 16 }}>
             <button
@@ -199,7 +194,6 @@ export default function App() {
               </div>
             )}
 
-            {/* 2. EDIT BUTTON IN TOP HEADER */}
             {profile && (
               <button
                 type="button"
@@ -261,7 +255,7 @@ export default function App() {
             </>
           )}
 
-          {/* 3. RESEARCHER PROFILE VIEW WITH EDIT BUTTON */}
+          {/* RESEARCHER PROFILE VIEW */}
           {!creating && !editing && profile && tab === "profile" && (
             <>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: 20 }}>
