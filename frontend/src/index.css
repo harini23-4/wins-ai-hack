@@ -1,5 +1,5 @@
 :root {
-  /* Slate & Ice Blue Palette (New Palette) */
+  /* Slate & Ice Blue Palette */
   --c-mint-lightest: #f0f4f8;
   --c-mint-pale: #e1e9f0;
   --c-sage-light: #c4d3e0;
@@ -60,6 +60,7 @@ body {
   font-size: 15.5px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 button, input, select, textarea {
@@ -71,13 +72,15 @@ button, input, select, textarea {
   display: flex;
   min-height: 100vh;
   position: relative;
-  overflow-x: hidden;
 }
 
-/* Sliding Sidebar */
+/* Sticky Sidebar (Always visible on screen) */
 .sidebar {
   width: 270px;
   min-width: 270px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
   background: var(--bg-sidebar);
   color: var(--text-on-dark);
   padding: 28px 20px;
@@ -89,6 +92,7 @@ button, input, select, textarea {
   transform: translateX(0);
   margin-left: 0;
   z-index: 30;
+  overflow-y: auto;
 }
 
 .app-shell.sidebar-collapsed .sidebar {
@@ -316,7 +320,7 @@ button, input, select, textarea {
   line-height: 1.55;
 }
 
-/* Form Styles & Organization */
+/* Form Styles */
 .form-section {
   margin-bottom: 24px;
   padding-bottom: 20px;
@@ -403,7 +407,7 @@ button, input, select, textarea {
   margin-top: 24px;
 }
 
-/* Stat Row & Stat Boxes (Project Tracker) */
+/* Stat Row */
 .stat-row {
   display: flex;
   gap: 16px;
@@ -457,7 +461,7 @@ button, input, select, textarea {
   box-shadow: 0 6px 18px rgba(22, 42, 63, 0.09);
 }
 
-/* Milestones & Status (Project Tracker) */
+/* Milestones */
 .milestone-list {
   list-style: none;
   padding: 0;
